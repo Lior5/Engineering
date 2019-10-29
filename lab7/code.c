@@ -53,7 +53,7 @@ my_state_t state = START;
 int main(void)
 
 {
-    bool left_done, right_done, back;
+    bool left_done, right_done, back, right;
     int turnTicks, driveTicks;
     int left_encoder_zero_pos, right_encoder_zero_pos;
 
@@ -118,54 +118,57 @@ int main(void)
         case DRIVE1:
             set_left_motor_direction(true);
             set_right_motor_direction(true);
-            set_left_motor_pwm(.1);
-            set_right_motor_pwm(.1);
+            set_left_motor_pwm(.3);
+            set_right_motor_pwm(.3);
+            right = true;
             // 0 is on the right
             if(bump_data0 == 1){
                 left_encoder_zero_pos = get_left_motor_count();
                 right_encoder_zero_pos = get_right_motor_count();
                 state = SETUP_TURN1;
                 back = true;
-                turnTicks = 50;
-                driveTicks = 200;
+                right = false;
+                turnTicks = 67;
+                driveTicks = 400;
             }else if(bump_data1 == 1){
                 left_encoder_zero_pos = get_left_motor_count();
                 right_encoder_zero_pos = get_right_motor_count();
-                back = false;
-                turnTicks = 100;
-                driveTicks = 200;
+                back = true;
+                right =false;
+                turnTicks = 133;
+                driveTicks = 400;
                 state = SETUP_TURN1;
             }
             else if(bump_data2 == 1){
                 left_encoder_zero_pos = get_left_motor_count();
                 right_encoder_zero_pos = get_right_motor_count();
                 back = false;
-                turnTicks = 150;
-                driveTicks = 200;
+                turnTicks = 200;
+                driveTicks = 400;
                 state = SETUP_TURN1;
             }
             else if(bump_data3 == 1){
                 left_encoder_zero_pos = get_left_motor_count();
                 right_encoder_zero_pos = get_right_motor_count();
                 back = false;
-                turnTicks = 150;
-                driveTicks = 200;
+                turnTicks = 200;
+                driveTicks = 400;
                 state = SETUP_TURN1;
             }
             else if(bump_data4 == 1){
                 left_encoder_zero_pos = get_left_motor_count();
                 right_encoder_zero_pos = get_right_motor_count();
-                back = false;
-                turnTicks = 100;
-                driveTicks = 200;
+                back = true;
+                turnTicks = 133;
+                driveTicks = 400;
                 state = SETUP_TURN1;
             }
             else if(bump_data5 == 1){
                 left_encoder_zero_pos = get_left_motor_count();
                 right_encoder_zero_pos = get_right_motor_count();
                 back = true;
-                turnTicks = 50;
-                driveTicks = 200;
+                turnTicks = 67;
+                driveTicks = 400;
                 state = SETUP_TURN1;
             }
             break;
@@ -174,16 +177,20 @@ int main(void)
             if(!back){
                 set_left_motor_direction(false);
                 set_right_motor_direction(false);
-                set_left_motor_pwm(.1);
-                set_right_motor_pwm(.1);
-                back = (get_left_motor_count() - left_encoder_zero_pos) >driveTicks;
+                set_left_motor_pwm(.3);
+                set_right_motor_pwm(.3);
+                back = (get_left_motor_count() - left_encoder_zero_pos < -driveTicks);
                 break;
             }
             left_encoder_zero_pos = get_left_motor_count();
             right_encoder_zero_pos = get_right_motor_count();
-
-            set_left_motor_direction(true);
-            set_right_motor_direction(false);
+            if(right){
+                set_left_motor_direction(true);
+                set_right_motor_direction(false);
+            }else{
+                set_left_motor_direction(false);
+                set_right_motor_direction(true);
+            }
 
             left_done = false;
             right_done = false;
@@ -195,8 +202,10 @@ int main(void)
         case TURN1:
             if (!left_done)
             {
-                set_left_motor_pwm(.1);
+                set_left_motor_pwm(.15);
+                if(right)
                 left_done = (get_left_motor_count() - left_encoder_zero_pos) > turnTicks;
+                else left_done = (get_left_motor_count() - left_encoder_zero_pos) < -turnTicks;
             }
             else
             {
@@ -205,8 +214,10 @@ int main(void)
 
             if(!right_done)
             {
-                set_right_motor_pwm(.1);
+                set_right_motor_pwm(.15);
+                if(right)
                 right_done = (get_right_motor_count() - right_encoder_zero_pos) < -turnTicks;
+                else right_done = (get_right_motor_count() - right_encoder_zero_pos) > turnTicks;
             }
             else
             {
@@ -216,7 +227,7 @@ int main(void)
             if (left_done && right_done) {
                 set_left_motor_pwm(0);          // Stop all motors
                 set_right_motor_pwm(0);
-                state = ALL_DONE;
+                state = SETUP_DRIVE1;
             }
             break;
 
@@ -286,6 +297,3 @@ void SysTick_Handler(void)
     tick++;
     // if ((tick%1000)==0) MAP_GPIO_toggleOutputOnPin(GPIO_PORT_P1, GPIO_PIN0);        // Toggle RED LED each time through loop
 }
-
-
-
