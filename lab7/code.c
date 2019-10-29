@@ -128,14 +128,14 @@ int main(void)
                 state = SETUP_TURN1;
                 back = true;
                 right = false;
-                turnTicks = 67;
+                turnTicks = 50;
                 driveTicks = 400;
             }else if(bump_data1 == 1){
                 left_encoder_zero_pos = get_left_motor_count();
                 right_encoder_zero_pos = get_right_motor_count();
-                back = true;
+                back = false;
                 right =false;
-                turnTicks = 133;
+                turnTicks = 100;
                 driveTicks = 400;
                 state = SETUP_TURN1;
             }
@@ -143,7 +143,7 @@ int main(void)
                 left_encoder_zero_pos = get_left_motor_count();
                 right_encoder_zero_pos = get_right_motor_count();
                 back = false;
-                turnTicks = 200;
+                turnTicks = 150;
                 driveTicks = 400;
                 state = SETUP_TURN1;
             }
@@ -151,15 +151,15 @@ int main(void)
                 left_encoder_zero_pos = get_left_motor_count();
                 right_encoder_zero_pos = get_right_motor_count();
                 back = false;
-                turnTicks = 200;
+                turnTicks = 150;
                 driveTicks = 400;
                 state = SETUP_TURN1;
             }
             else if(bump_data4 == 1){
                 left_encoder_zero_pos = get_left_motor_count();
                 right_encoder_zero_pos = get_right_motor_count();
-                back = true;
-                turnTicks = 133;
+                back = false;
+                turnTicks = 100;
                 driveTicks = 400;
                 state = SETUP_TURN1;
             }
@@ -167,7 +167,7 @@ int main(void)
                 left_encoder_zero_pos = get_left_motor_count();
                 right_encoder_zero_pos = get_right_motor_count();
                 back = true;
-                turnTicks = 67;
+                turnTicks = 50;
                 driveTicks = 400;
                 state = SETUP_TURN1;
             }
