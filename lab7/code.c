@@ -34,7 +34,7 @@ int tick=0;
 
 int mytime[20];
 int i=0;
-
+int mouse;
 typedef enum
 {
     START = 0,
@@ -143,6 +143,8 @@ int main(void)
                 left_encoder_zero_pos = get_left_motor_count();
                 right_encoder_zero_pos = get_right_motor_count();
                 back = false;
+                mouse = rand()%2;
+                if(mouse==1)right = false;
                 turnTicks = 150;
                 driveTicks = 400;
                 state = SETUP_TURN1;
@@ -151,6 +153,8 @@ int main(void)
                 left_encoder_zero_pos = get_left_motor_count();
                 right_encoder_zero_pos = get_right_motor_count();
                 back = false;
+                mouse = rand()%2;
+                if(mouse==1)right = false;
                 turnTicks = 150;
                 driveTicks = 400;
                 state = SETUP_TURN1;
