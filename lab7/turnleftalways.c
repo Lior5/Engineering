@@ -272,7 +272,7 @@ int main(void)
 
             set_right_motor_pwm(.5);
 
-            right = false;
+            right = true;
 
             // 0 is on the right
 
@@ -286,7 +286,6 @@ int main(void)
 
                 back = true;
 
-                right = false;
 
                 turnTicks = 50;
 
@@ -300,7 +299,6 @@ int main(void)
 
                 back = false;
 
-                right =false;
 
                 turnTicks = 100;
 
@@ -319,7 +317,6 @@ int main(void)
                 back = false;
 
 
-                right = false;
 
                 turnTicks = 150;
 
@@ -338,7 +335,6 @@ int main(void)
                 back = false;
 
 
-                right = false;
 
                 turnTicks = 150;
 
