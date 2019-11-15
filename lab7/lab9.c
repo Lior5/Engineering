@@ -144,14 +144,14 @@ int main(void)
                 back = true;
                 right = false;
                 turnTicks = 50;
-                driveTicks = 400;
+                driveTicks = 20;
             }else if(bump_data1 == 1){
                 left_encoder_zero_pos = get_left_motor_count();
                 right_encoder_zero_pos = get_right_motor_count();
                 back = false;
                 right =false;
                 turnTicks = 100;
-                driveTicks = 400;
+                driveTicks = 20;
                 state = SETUP_TURN1;
             }
             else if(bump_data2 == 1){
@@ -161,7 +161,7 @@ int main(void)
                 mouse = rand()%2;
                 if(mouse==1)right = false;
                 turnTicks = 150;
-                driveTicks = 400;
+                driveTicks = 20;
                 state = SETUP_TURN1;
             }
             else if(bump_data3 == 1){
@@ -171,7 +171,7 @@ int main(void)
                 mouse = rand()%2;
                 if(mouse==1)right = false;
                 turnTicks = 150;
-                driveTicks = 400;
+                driveTicks = 20;
                 state = SETUP_TURN1;
             }
             else if(bump_data4 == 1){
@@ -179,7 +179,7 @@ int main(void)
                 right_encoder_zero_pos = get_right_motor_count();
                 back = false;
                 turnTicks = 100;
-                driveTicks = 400;
+                driveTicks = 20;
                 state = SETUP_TURN1;
             }
             else if(bump_data5 == 1){
@@ -187,7 +187,7 @@ int main(void)
                 right_encoder_zero_pos = get_right_motor_count();
                 back = true;
                 turnTicks = 50;
-                driveTicks = 400;
+                driveTicks = 20;
                 state = SETUP_TURN1;
             }
             break;
