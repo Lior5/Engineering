@@ -1,11 +1,7 @@
 /*
-
  * Main.c
-
  *
-
  * Main file containing the main state machine.
-
  */
 
 /* Standard Includes */
@@ -117,7 +113,6 @@ my_state_t state = START;
 
 
 int main(void)
-
 
 
 {
@@ -268,9 +263,9 @@ int main(void)
 
             set_right_motor_direction(true);
 
-            set_left_motor_pwm(.4);
+            set_left_motor_pwm(.3);
 
-            set_right_motor_pwm(.5);
+            set_right_motor_pwm(.8);
 
             right = true;
 
@@ -285,11 +280,11 @@ int main(void)
                 state = SETUP_TURN1;
 
                 back = true;
-
+                right = false;
 
                 turnTicks = 50;
 
-                driveTicks = 400;
+                driveTicks = 20;
 
             }else if(bump_data1 == 1){
 
@@ -300,9 +295,9 @@ int main(void)
                 back = false;
 
 
-                turnTicks = 100;
+                turnTicks = 250;
 
-                driveTicks = 400;
+                driveTicks = 20;
 
                 state = SETUP_TURN1;
 
@@ -318,9 +313,9 @@ int main(void)
 
 
 
-                turnTicks = 150;
+                turnTicks = 200;
 
-                driveTicks = 50;
+                driveTicks = 20;
 
                 state = SETUP_TURN1;
 
@@ -338,7 +333,7 @@ int main(void)
 
                 turnTicks = 150;
 
-                driveTicks = 50;
+                driveTicks = 20;
 
                 state = SETUP_TURN1;
 
@@ -354,7 +349,7 @@ int main(void)
 
                 turnTicks = 100;
 
-                driveTicks = 50;
+                driveTicks = 20;
 
                 state = SETUP_TURN1;
 
@@ -370,7 +365,7 @@ int main(void)
 
                 turnTicks = 50;
 
-                driveTicks = 50;
+                driveTicks = 20;
 
                 state = SETUP_TURN1;
 
@@ -521,13 +516,9 @@ void Initialize_System()
 {
 
     /*
-
      * Initialize main clock
-
      *
-
      * SMCLK = 12Mhz
-
      */
 
     Clock_Init48MHz();
@@ -581,9 +572,7 @@ void Initialize_System()
 
 
     /*
-
      * Configuring SysTick to trigger at .001 sec (MCLK is 48Mhz)
-
      */
 
     MAP_SysTick_enableModule();
@@ -621,15 +610,10 @@ void Initialize_System()
 
 
 /*
-
  * Handle the SysTick Interrupt.  Currently interrupting at 1/10 second.
-
  *
-
  * Increment the tick counter "tick"
-
  * Blink the red led
-
  */
 
 void SysTick_Handler(void)
@@ -641,4 +625,3 @@ void SysTick_Handler(void)
     // if ((tick%1000)==0) MAP_GPIO_toggleOutputOnPin(GPIO_PORT_P1, GPIO_PIN0);        // Toggle RED LED each time through loop
 
 }
-
