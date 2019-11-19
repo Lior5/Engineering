@@ -236,9 +236,9 @@ int main(void)
 
             set_right_motor_direction(true);
 
-            set_left_motor_pwm(1);
+            set_left_motor_pwm(.5);
 
-            set_right_motor_pwm(1);
+            set_right_motor_pwm(.5);
 
 
             left_done = false;
@@ -270,11 +270,11 @@ int main(void)
 
 
         case DRIVE1:
-            if(right_encoder_zero_pos-get_right_motor_count()>driveTicks){
+            if(right_encoder_zero_pos-get_right_motor_count()>-driveTicks){
                 count++;
                 state = SETUP_DRIVE1;
             }
-            if(lux<30){
+            if(lux<100){
 
                 set_left_motor_pwm(0);
 
@@ -290,9 +290,9 @@ int main(void)
 
             set_right_motor_direction(true);
 
-            set_left_motor_pwm(1);
+            set_left_motor_pwm(.5);
 
-            set_right_motor_pwm(1);
+            set_right_motor_pwm(.5);
 
             right = true;
 
