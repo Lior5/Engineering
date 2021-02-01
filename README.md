@@ -1,3 +1,3 @@
 # Engineering
 
-Multiple maze-traversal algorithms to solve any maze configuration.
+Maze algorithms written in C in participation in the UCF Texas Instruments Robot Maze Competition.
